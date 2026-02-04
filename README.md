@@ -6,5 +6,5 @@
 
 <img src="loan calc 1.png" alt="Data Entry and Basic Info Area"></img>
 
-![Amortization Table]("loan calc 2.png")
+<img src="loan calc 2.png" alt="Amortization Table"></img>
 
