@@ -4,7 +4,7 @@
 
 #### Modify as needed...
 
-![Data Entry and Basic Info Area]("loan calc 1.png")
+<img src="loan calc 1.png" alt="Data Entry and Basic Info Area"></img>
 
 ![Amortization Table]("loan calc 2.png")
 
