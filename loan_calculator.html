@@ -296,7 +296,7 @@
             innertext += amortLine(i, begbal, pmt, pmt - intrst, intrst, begbal - (pmt - intrst));
             begbal -= pmt - intrst;
             remint -= intrst;
-            if (i > 1 && i % 12 == 1)
+            if (i > 1 && i % 12 == 0)
                 innertext += hdrLine();
         }
         innertext += amortLine(termb, begbal, fnlpmt, fnlpmt - remint, remint, 0);
