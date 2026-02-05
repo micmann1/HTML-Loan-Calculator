@@ -97,6 +97,9 @@
         td p.clsfont120{
             font-size:120%;
         }
+        td.clslrgr {
+            font-size:125%;
+        }
     </style>
 </head>
 
@@ -178,7 +181,7 @@
         <table class="cls40rw">
             <thead>
                 <tr>
-                    <td colspan="6">Amortization Schedule</td>
+                    <td colspan="6" class="clslrgr">Amortization Schedule</td>
                 </tr>
             </thead>
             <tbody id="idtblamortbody">
@@ -199,11 +202,6 @@
     * please.
     */
 
-    function amortLine(i, begbal, pmt, prin, intrst, endbal) {
-        return `<tr><td>${i}</td><td>${fmtFromCents(begbal)}</td>` +
-            `<td>${fmtFromCents(pmt)}</td><td>${fmtFromCents(prin)}</td>` +
-            `<td>${fmtFromCents(intrst)}</td><td>${fmtFromCents(endbal)}</td></tr>`;
-    }
     function buttonManager() {
         idcalc.disabled = !(idamount.getAttribute("usenum").length &&
             idapr.getAttribute("usenum").length &&
@@ -220,12 +218,6 @@
     }
     function fmtFromCents(x) {
         return Math.floor(x / 100).toLocaleString() + "." + String(x % 100).padStart(2, '0');
-    }
-    function hdrLine(addanchor = true) {
-        return (addanchor ? '<tr><td colspan="6"><a href="#atop">Back To Top</a></td></tr>' : '') +
-            '<tr class="clsnavline"><td>&numero;</td><td class="clsgreen">Beg Bal</td>' +
-            '<td class="clsteal">Payment</td><td>Principle</td><td class="clsred">Interest</td>' +
-            '<td class="clsgreen">End Bal </td></tr>';
     }
     function inpChanged(e) {
         const rxamount = new RegExp(/^\s*\$?(\d+|\d{1,3}(,\d{3})*)\s*$/);
@@ -268,6 +260,17 @@
         setTimeout(_showResults, 10);
     }
     function _showResults() {
+        function amortLine(i, begbal, pmt, prin, intrst, endbal) {
+            return `<tr><td>${i}</td><td>${fmtFromCents(begbal)}</td>` +
+                `<td>${fmtFromCents(pmt)}</td><td>${fmtFromCents(prin)}</td>` +
+                `<td>${fmtFromCents(intrst)}</td><td>${fmtFromCents(endbal)}</td></tr>`;
+        }
+        function hdrLine(addanchor = true) {
+            return (addanchor ? '<tr><td colspan="6"><a href="#atop">Back To Top</a></td></tr>' : '') +
+                '<tr class="clsnavline"><td>&numero;</td><td class="clsgreen">Beg Bal</td>' +
+                '<td class="clsteal">Payment</td><td>Principle</td><td class="clsred">Interest</td>' +
+                '<td class="clsgreen">End Bal </td></tr>';
+        }
         const amt = (idamount.getAttribute("usenum") - 0) * 100/*cents per*/;
         const ratea = Number((idapr.getAttribute("usenum") - 0).toPrecision(4));
         const rateb = ratea / 1200;
