@@ -37,6 +37,7 @@
         table {
             border: 1px solid black;
         }
+
         .cls40rw {
             width: 40rem;
         }
@@ -94,11 +95,17 @@
             text-decoration: underline;
             text-decoration-thickness: 0.2rem;
         }
-        td p.clsfont120{
-            font-size:120%;
+
+        td p.clsfont120 {
+            font-size: 120%;
         }
+
         td.clslrgr {
-            font-size:125%;
+            font-size: 125%;
+        }
+
+        #iddivamorthdr div {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -183,8 +190,26 @@
                 <tr>
                     <td colspan="6" class="clslrgr">Amortization Schedule</td>
                 </tr>
+                <tr>
+                    <td>
+                        <div id="iddivamorthdr" style="display:flex">
+                            <div style="flex:1">&numero;</div>
+                            <div style="flex:2" class="clsgreen">Beg Bal</div>
+                            <div style="flex:2" class="clsteal">Payment</div>
+                            <div style="flex:2">Principle</div>
+                            <div style="flex:2" class="clsred">Interest</div>
+                            <div style="flex:2" class="clsgreen">End Bal </div>
+                        </div>
+                    </td>
+                </tr>
             </thead>
             <tbody id="idtblamortbody">
+                <tr>
+                    <td>
+                        <div id="idamortdetails" style="display:block;height:25rem;overflow-y:scroll">
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <br />
@@ -261,15 +286,14 @@
     }
     function _showResults() {
         function amortLine(i, begbal, pmt, prin, intrst, endbal) {
-            return `<tr><td>${i}</td><td>${fmtFromCents(begbal)}</td>` +
-                `<td>${fmtFromCents(pmt)}</td><td>${fmtFromCents(prin)}</td>` +
-                `<td>${fmtFromCents(intrst)}</td><td>${fmtFromCents(endbal)}</td></tr>`;
-        }
-        function hdrLine(addanchor = true) {
-            return (addanchor ? '<tr><td colspan="6"><a href="#atop">Back To Top</a></td></tr>' : '') +
-                '<tr class="clsnavline"><td>&numero;</td><td class="clsgreen">Beg Bal</td>' +
-                '<td class="clsteal">Payment</td><td>Principle</td><td class="clsred">Interest</td>' +
-                '<td class="clsgreen">End Bal </td></tr>';
+            return `<div style="display:flex">
+                        <div style="flex:1">${i}</div>
+                        <div style="flex:2">${fmtFromCents(begbal)}</div>
+                        <div style="flex:2">${fmtFromCents(pmt)}</div>
+                        <div style="flex:2">${fmtFromCents(prin)}</div>
+                        <div style="flex:2">${fmtFromCents(intrst)}</div>
+                        <div style="flex:2">${fmtFromCents(endbal)}</div>
+                    </div>`;
         }
         const amt = (idamount.getAttribute("usenum") - 0) * 100/*cents per*/;
         const ratea = Number((idapr.getAttribute("usenum") - 0).toPrecision(4));
@@ -290,20 +314,20 @@
         iddsplyttlint.innerHTML = fmtFromCents(ttlint);
 
         //Amort
-        idtblamortbody.innerHTML = '';
+        idamortdetails.innerHTML = '';
         let innertext = '';
-        innertext += hdrLine(false);
+        // innertext += hdrLine(false);
         let begbal = amt, endbal, prin, intrst, remint = ttlint;
         for (let i = 1; i <= termb - 1; ++i) {
             intrst = Math.min(remint, Math.roundHalfEven(begbal * rateb));
             innertext += amortLine(i, begbal, pmt, pmt - intrst, intrst, begbal - (pmt - intrst));
             begbal -= pmt - intrst;
             remint -= intrst;
-            if (i > 1 && i % 12 == 0)
-                innertext += hdrLine();
+            // if (i > 1 && i % 12 == 0)
+            //     innertext += hdrLine();
         }
         innertext += amortLine(termb, begbal, fnlpmt, fnlpmt - remint, remint, 0);
-        idtblamortbody.innerHTML = innertext;
+        idamortdetails.innerHTML = innertext;
 
         idcalc.innerHTML = 'Calculate';
         idcalc.disabled = false;
