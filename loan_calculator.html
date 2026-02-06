@@ -178,7 +178,7 @@
             Simple Loan Calculator
         </h1>
         <p>(Fixed Compound Interest + Monthly Payments)</p><br />
-        <label for="idstart">Starting Month & Year:</label><br />
+        <label for="idstart">Starting Month &amp; Year:</label><br />
         <input type="number" id="idmonth" min="1" max="12" />
         <input type="number" id="idyear" min="2026" /><br />
         <div style="display:flex;align-items:center;justify-content:center">
@@ -193,12 +193,12 @@
         </div>
         <label for="idterm">Term:</label><br />
         <input type="text" id="idterm" /><br />
-        <buttongroup id="idtermtype" name="natermtype">
+        <fieldset id="idtermtype" name="natermtype" style="border:none">
             <label for="idtermmonths">Months</label>
             <input type="radio" id="idtermmonths" name="natermtype" value="m" />
             &nbsp;&nbsp;<label for="idtermyears">Years</label>
             <input type="radio" id="idtermyears" name="natermtype" value="y" checked />
-        </buttongroup>
+        </fieldset>
         <br /><br />
         <button type="button" id="idcalc" disabled>Calculate</button>
         <table id="idtblsum">
@@ -291,8 +291,8 @@
         const HDR =
             `
         <tr>
-            <td colspan="7" class="clslrgr">Amortization Schedule&nbsp;&nbsp;
-            <button id="idamorttype" type="button" onclick="amortByYear()">Details By Year</button></td>
+            <td colspan="7" class="clslrgr">Monthly Amortization Schedule&nbsp;&nbsp;
+            <button id="idamorttype" type="button" onclick="amortByYear()">Yearly Summary</button></td>
         </tr>
         <tr>
             <td>&numero;</td>
@@ -336,8 +336,8 @@
         const HDR =
             `
         <tr>
-            <td colspan="5" class="clslrgr">Amortization Schedule&nbsp;&nbsp;
-            <button id="idamorttype" type="button" onclick="amortByMonth()">Details By Month</button></td>
+            <td colspan="5" class="clslrgr">Yearly Summary&nbsp;&nbsp;
+            <button id="idamorttype" type="button" onclick="amortByMonth()">Monthly Schedule</button></td>
         </tr>
         <tr>
             <td>&numero;</td>
@@ -400,6 +400,9 @@
         // console.log(payback);
         return [Math.roundHalfEven(pmt), Math.floor(payback)];
     }
+    function decimalSep() {
+        return nstr = (0.1).toLocaleString().slice(-2, -1);
+    }
     function fillSummary(amt, ratea, terma, termb, pmt, ttlpay, lastpay) {
         iddsplyamt.innerHTML = fmtFromCents(amt);
         iddsplyapr.innerHTML = ratea + "%";
@@ -413,11 +416,11 @@
         iddsplylastpay.innerHTML = lastpay;
     }
     function fmtFromCents(x) {
-        return Math.floor(x / 100).toLocaleString() + "." + String(x % 100).padStart(2, '0');
+        return Math.floor(x / 100).toLocaleString() + decimalSep() + String(x % 100).padStart(2, '0');
     }
     function inpChanged(e) {
-        const rxamount = new RegExp(/^\s*\$?(\d+|\d{1,3}(,\d{3})*)\s*$/);
-        const rxapr = new RegExp(/^\s*(\d+(\.\d*)?|\.\d+)%?\s*$/);
+        const rxamount = new RegExp(/^\s*(\d+|\d{1,3}([,\.]\d{3})*)\s*$/);
+        const rxapr = new RegExp(/^\s*(\d+([\.,]\d*)?|[\.,]\d+)%?\s*$/);
         const rxterm = new RegExp(/^\s*\d+\s*$/);
         let el = e.srcElement;
         if (el.id.startsWith("idterm"))
@@ -427,8 +430,8 @@
             case "idamount":
                 mat = idamount.value.match(rxamount);
                 if (!mat) break;
-                n = Number(mat[0].replace(/[$,]/g, ''));
-                valid = n >= 100 && n < 1e11;
+                n = Number(mat[0].replace(/[,\.]/g, ''));
+                valid = n >= 100 && n < 1e11 && Number.isInteger(n);
                 break;
             case "idapr":
                 mat = idapr.value.match(rxapr);
@@ -511,7 +514,7 @@
             return Math.floor(x) % 2 ? Math.ceil(x) : Math.floor(x);
         }
         const nxt = nextMonthYear();
-        idmonth.value = nxt[0] + 1;/*zero-based to one-based*/
+        idmonth.value = nxt[0] + 1;/*to one-based*/
         idyear.value = nxt[1];
         idmonth.focus();
     }

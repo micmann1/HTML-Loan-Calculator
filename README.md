@@ -1,7 +1,6 @@
 ### Loan Calculator with Amortization Table
 
-#### Basic compound interest loan calculator using HTML, Javascript and CSS, that tries to get the rounding correct to the 1/100th of a ($£€¥₨...) along with the amortization table entries. This was designed specifically for numeric formats with '.'(DOT) as decimal separator and ','(COMMA) as group separator. 
-
+#### Basic compound interest loan calculator using HTML, Javascript and CSS, that tries to get the rounding correct to the 1/100th of a ($£€¥₨...) along with the amortization table entries (Monthly detail as well as Yearly summary). This app should work with either '.' or ',' as the locale decimal separator.
 #### Modify as needed...
 
 <img src="loan calc 1.png" alt="Data Entry and Basic Info Area"></img>

@@ -1,0 +1,108 @@
+loan_calculator.html:181: HTML parser error : htmlParseEntityRef: no name
+        <label for="idstart">Starting Month & Year:</label><br />
+                                             ^
+loan_calculator.html:196: HTML parser error : Tag buttongroup invalid
+        <buttongroup id="idtermtype" name="natermtype">
+                                                      ^
+loan_calculator.html:295: HTML parser error : Unexpected end tag : button
+ id="idamorttype" type="button" onclick="amortByYear()">Details By Year</button>
+                                                                               ^
+loan_calculator.html:295: HTML parser error : Unexpected end tag : td
+"idamorttype" type="button" onclick="amortByYear()">Details By Year</button></td
+                                                                               ^
+loan_calculator.html:296: HTML parser error : Unexpected end tag : tr
+        </tr>
+             ^
+loan_calculator.html:298: HTML parser error : Unexpected end tag : td
+            <td>&numero;</td>
+                             ^
+loan_calculator.html:299: HTML parser error : Unexpected end tag : td
+            <td>MM/YY</td>
+                          ^
+loan_calculator.html:300: HTML parser error : Unexpected end tag : td
+            <td>Beg Bal</td>
+                            ^
+loan_calculator.html:301: HTML parser error : Unexpected end tag : td
+            <td>Payment</td>
+                            ^
+loan_calculator.html:302: HTML parser error : Unexpected end tag : td
+            <td>Principle</td>
+                              ^
+loan_calculator.html:303: HTML parser error : Unexpected end tag : td
+            <td class="clsred">Interest</td>
+                                            ^
+loan_calculator.html:304: HTML parser error : Unexpected end tag : td
+            <td>End Bal</td>
+                            ^
+loan_calculator.html:305: HTML parser error : Unexpected end tag : tr
+        </tr>
+             ^
+loan_calculator.html:309: HTML parser error : Unexpected end tag : td
+                        <td>${i}</td>
+                                     ^
+loan_calculator.html:310: HTML parser error : Unexpected end tag : td
+                        <td>${mmyy}</td>
+                                        ^
+loan_calculator.html:311: HTML parser error : Unexpected end tag : td
+                        <td>${fmtFromCents(begbal)}</td>
+                                                        ^
+loan_calculator.html:312: HTML parser error : Unexpected end tag : td
+                        <td>${fmtFromCents(pmt)}</td>
+                                                     ^
+loan_calculator.html:313: HTML parser error : Unexpected end tag : td
+                        <td>${fmtFromCents(prin)}</td>
+                                                      ^
+loan_calculator.html:314: HTML parser error : Unexpected end tag : td
+                        <td>${fmtFromCents(intrst)}</td>
+                                                        ^
+loan_calculator.html:315: HTML parser error : Unexpected end tag : td
+                        <td>${fmtFromCents(endbal)}&nbsp;</td>
+                                                              ^
+loan_calculator.html:316: HTML parser error : Unexpected end tag : tr
+                    </tr>`;
+                         ^
+loan_calculator.html:340: HTML parser error : Unexpected end tag : button
+d="idamorttype" type="button" onclick="amortByMonth()">Details By Month</button>
+                                                                               ^
+loan_calculator.html:340: HTML parser error : Unexpected end tag : td
+damorttype" type="button" onclick="amortByMonth()">Details By Month</button></td
+                                                                               ^
+loan_calculator.html:341: HTML parser error : Unexpected end tag : tr
+        </tr>
+             ^
+loan_calculator.html:343: HTML parser error : Unexpected end tag : td
+            <td>&numero;</td>
+                             ^
+loan_calculator.html:344: HTML parser error : Unexpected end tag : td
+            <td>Year</td>
+                         ^
+loan_calculator.html:345: HTML parser error : Unexpected end tag : td
+            <td>Principle</td>
+                              ^
+loan_calculator.html:346: HTML parser error : Unexpected end tag : td
+            <td class="clsred">Interest</td>
+                                            ^
+loan_calculator.html:347: HTML parser error : Unexpected end tag : td
+            <td>Ending Bal</td>
+                               ^
+loan_calculator.html:348: HTML parser error : Unexpected end tag : tr
+        </tr>
+             ^
+loan_calculator.html:352: HTML parser error : Unexpected end tag : td
+                        <td>${i}</td>
+                                     ^
+loan_calculator.html:353: HTML parser error : Unexpected end tag : td
+                        <td>${yr}</td>
+                                      ^
+loan_calculator.html:354: HTML parser error : Unexpected end tag : td
+                        <td>${fmtFromCents(prin)}</td>
+                                                      ^
+loan_calculator.html:355: HTML parser error : Unexpected end tag : td
+                        <td>${fmtFromCents(intrst)}</td>
+                                                        ^
+loan_calculator.html:356: HTML parser error : Unexpected end tag : td
+                        <td>${fmtFromCents(endbal)}&nbsp;</td>
+                                                              ^
+loan_calculator.html:357: HTML parser error : Unexpected end tag : tr
+                    </tr>`;
+                         ^
