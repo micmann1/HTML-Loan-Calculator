@@ -17,8 +17,7 @@
 
         #idmaindiv {
             display: block;
-            min-width: 40rem;
-            width: 80%;
+            min-width: 60rem;
             margin: 0 auto;
             text-align: center;
         }
@@ -34,20 +33,15 @@
             font-weight: bold;
         }
 
-        table {
-            border: 1px solid black;
-        }
-
-        .cls40rw {
-            width: 40rem;
-        }
-
         td,
         thead {
             text-align: center;
         }
 
-        thead,
+        thead {
+            font-weight: bold;
+        }
+
         .clsnavline {
             border: 1px solid black;
             font-weight: bold;
@@ -79,8 +73,25 @@
         }
 
         table {
+            border-collapse: collapse;
             margin: 0 auto;
-            width: 20rem;
+        }
+
+        div.clsscroll {
+            display: inline-flex;
+            min-width: 50.5rem;
+            max-height: 20rem;
+            text-align: center;
+            overflow-y: scroll;
+        }
+        div.clsnarrow {
+            min-width: 36.5rem;
+        }
+        #idtblamorthead {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: white;
         }
 
         #idcalc {
@@ -96,8 +107,8 @@
             text-decoration-thickness: 0.2rem;
         }
 
-        td p.clsfont120 {
-            font-size: 120%;
+        td p.clsfont100 {
+            font-size: 100%;
         }
 
         td.clslrgr {
@@ -106,6 +117,56 @@
 
         #iddivamorthdr div {
             text-decoration: underline;
+        }
+
+        #idmonth,
+        #idyear {
+            width: 6rem;
+        }
+
+        #idamount,
+        #idapr,
+        #idterm {
+            width: 8rem;
+        }
+
+        input {
+            text-align: right;
+        }
+
+        #idtblsum {
+            min-width: 25rem;
+        }
+
+        #idtblsum td.clssum {
+            text-align: right;
+        }
+
+        #idtblsum {
+            border: 2px solid blue;
+        }
+
+        #idtblamort {
+            /* border-left: 2px solid blue; */
+            /* border-right: 2px solid blue; */
+            min-width: 50rem;
+            border-bottom: 2px solid blue;
+        }
+        #idtblamort.clsnarrow {
+            min-width: 36rem;
+        }
+        #idtblamort thead button {
+            font-size: 70%;
+        }
+
+        #iddivamorthdr {
+            border-bottom: 2px solid blue;
+            /* margin-right: 10px; */
+        }
+
+        #idamortdetails div,
+        #iddivamorthdr div {
+            padding-right: 10px;
         }
     </style>
 </head>
@@ -117,10 +178,19 @@
             Simple Loan Calculator
         </h1>
         <p>(Fixed Compound Interest + Monthly Payments)</p><br />
-        <label for="idamount">Loan Amount:</label><br />
-        <input type="text" id="idamount" /><br /><br />
-        <label for="idapr">APR:</label><br />
-        <input type="text" id="idapr" /><br /><br />
+        <label for="idstart">Starting Month & Year:</label><br />
+        <input type="number" id="idmonth" min="1" max="12" />
+        <input type="number" id="idyear" min="2026" /><br />
+        <div style="display:flex;align-items:center;justify-content:center">
+            <div style="margin-right:5px">
+                <label for="idamount">Loan Amount:</label><br />
+                <input type="text" id="idamount" />
+            </div>
+            <div>
+                <label for="idapr">APR%:</label><br />
+                <input type="text" id="idapr" />
+            </div>
+        </div>
         <label for="idterm">Term:</label><br />
         <input type="text" id="idterm" /><br />
         <buttongroup id="idtermtype" name="natermtype">
@@ -131,12 +201,12 @@
         </buttongroup>
         <br /><br />
         <button type="button" id="idcalc" disabled>Calculate</button>
-        <table>
+        <table id="idtblsum">
             <thead>
                 <tr>
-                    <td style="width:33.3%" class="clsgreen">Amount:</td>
-                    <td style="width:33.3%" class="clsblue">APR:</td>
-                    <td style="width:33.3%" class="clsorange">Term:</td>
+                    <td style="width:33.3%">Amount:</td>
+                    <td style="width:33.3%">APR:</td>
+                    <td style="width:33.3%">Term:</td>
                 </tr>
                 <tr>
                     <td>
@@ -150,70 +220,48 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" class="clsteal">Monthly Payment:</td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <p id="iddsplypmt" class="clsfont120">0.00</p>
+                    <td colspan="2" class="clssum">Monthly Payment:</td>
+                    <td class="clssum">
+                        <p id="iddsplypmt" class="clsfont100">0.00</p>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" class="clsnavy">Final Payment:</td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <p id="iddsplyfnlpmt" class="clsfont120">0.00</p>
+                    <td colspan="2" class="clssum">Final Payment:</td>
+                    <td class="clssum">
+                        <p id="iddsplyfnlpmt" class="clsfont100">0.00</p>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3">Total of Payments:</td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <p id="iddsplyttlpmt" class="clsfont120">0.00</p>
+                    <td colspan="2" class="clssum">Total of Payments:</td>
+                    <td class="clssum">
+                        <p id="iddsplyttlpmt" class="clsfont100">0.00</p>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" class="clsred">Total Interest:</td>
+                    <td colspan="2" class="clssum">Total Interest:</td>
+                    <td class="clssum">
+                        <p id="iddsplyttlint" class="clsfont100">0.00</p>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
-                        <p id="iddsplyttlint" class="clsfont120">0.00</p>
+                    <td colspan="2" class="clssum">Last Payment Date:</td>
+                    <td class="clssum">
+                        <p id="iddsplylastpay" class="clsfont100"></p>
                     </td>
                 </tr>
             </thead>
         </table>
         <br />
-
-        <table class="cls40rw">
-            <thead>
-                <tr>
-                    <td colspan="6" class="clslrgr">Amortization Schedule</td>
-                </tr>
-                <tr>
-                    <td>
-                        <div id="iddivamorthdr" style="display:flex">
-                            <div style="flex:1">&numero;</div>
-                            <div style="flex:2" class="clsgreen">Beg Bal</div>
-                            <div style="flex:2" class="clsteal">Payment</div>
-                            <div style="flex:2">Principle</div>
-                            <div style="flex:2" class="clsred">Interest</div>
-                            <div style="flex:2" class="clsgreen">End Bal </div>
-                        </div>
-                    </td>
-                </tr>
-            </thead>
-            <tbody id="idtblamortbody">
-                <tr>
-                    <td>
-                        <div id="idamortdetails" style="display:block;height:25rem;overflow-y:scroll">
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <br />
+        <div class="clsscroll">
+            <table id="idtblamort">
+                <thead id="idtblamorthead">
+                </thead>
+                <tbody id="idtblamortbody">
+                </tbody>
+            </table>
+        </div>
     </div>
+    <br /><br />
 </body>
 <script>
     /*
@@ -226,7 +274,118 @@
     * settle this question...so allow some slack with the exactness,
     * please.
     */
-
+    function details(){
+        const mon = idmonth.value-0, yr = idyear.value-0;
+        const amt = (idamount.getAttribute("usenum") - 0) * 100/*cents per*/;
+        const ratea = Number((idapr.getAttribute("usenum") - 0).toPrecision(4));
+        const rateb = ratea / 1200;
+        const terma = idterm.getAttribute("usenum") - 0;
+        const termb = terma * (idtermmonths.checked ? 1 : 12);
+        const [pmt, ttlpay] = calcPmt(amt, rateb, termb);
+        const ttlint = ttlpay - amt;
+        const fnlpmt = ttlpay - (termb - 1) * pmt;
+        return {"mon":mon, "yr":yr, "amt":amt, "ratea":ratea, "rateb":rateb, "terma":terma, "termb":termb,
+                "pmt":pmt, "ttlpay":ttlpay, "ttlint":ttlint, "fnlpmt":fnlpmt};
+    }
+    function amortByMonth() {
+        const HDR =
+            `
+        <tr>
+            <td colspan="7" class="clslrgr">Amortization Schedule&nbsp;&nbsp;
+            <button id="idamorttype" type="button" onclick="amortByYear()">Details By Year</button></td>
+        </tr>
+        <tr>
+            <td>&numero;</td>
+            <td>MM/YY</td>
+            <td>Beg Bal</td>
+            <td>Payment</td>
+            <td>Principle</td>
+            <td class="clsred">Interest</td>
+            <td>End Bal</td>
+        </tr>
+        `.trim();
+        function amortLine(i, mmyy, begbal, pmt, prin, intrst, endbal) {
+            return `<tr>
+                        <td>${i}</td>
+                        <td>${mmyy}</td>
+                        <td>${fmtFromCents(begbal)}</td>
+                        <td>${fmtFromCents(pmt)}</td>
+                        <td>${fmtFromCents(prin)}</td>
+                        <td>${fmtFromCents(intrst)}</td>
+                        <td>${fmtFromCents(endbal)}&nbsp;</td>
+                    </tr>`;
+        };
+        const dtl = details();
+        let mon = dtl.mon, yr = dtl.yr;
+        let innertext = '';
+        let begbal = dtl.amt, endbal, prin, intrst, remint = dtl.ttlint;
+        for (let i = 1; i <= dtl.termb - 1; ++i) {
+            intrst = Math.min(remint, Math.roundHalfEven(begbal * dtl.rateb));
+            innertext += amortLine(i, `${String(mon).padStart(2,'0')}/${yr%100}`, begbal, dtl.pmt, dtl.pmt - intrst, intrst, begbal - (dtl.pmt - intrst));
+            [mon, yr] = monthsDiff(mon, yr, 1);
+            begbal -= dtl.pmt - intrst;
+            remint -= intrst;
+        }
+        innertext += amortLine(dtl.termb, `${String(mon).padStart(2,'0')}/${yr%100}`, begbal, dtl.fnlpmt, dtl.fnlpmt - remint, remint, 0);
+        idtblamorthead.innerHTML = HDR;
+        idtblamortbody.innerHTML = innertext;
+        idtblamort.className = idtblamort.className.replace(" clsnarrow","");
+        idtblamort.parentElement.className = idtblamort.parentElement.className.replace(" clsnarrow","");
+    }
+    function amortByYear() {
+        const HDR =
+            `
+        <tr>
+            <td colspan="5" class="clslrgr">Amortization Schedule&nbsp;&nbsp;
+            <button id="idamorttype" type="button" onclick="amortByMonth()">Details By Month</button></td>
+        </tr>
+        <tr>
+            <td>&numero;</td>
+            <td>Year</td>
+            <td>Principle</td>
+            <td class="clsred">Interest</td>
+            <td>Ending Bal</td>
+        </tr>
+        `.trim();
+        function amortLine(i, yr, prin, intrst, endbal) {
+            return `<tr>
+                        <td>${i}</td>
+                        <td>${yr}</td>
+                        <td>${fmtFromCents(prin)}</td>
+                        <td>${fmtFromCents(intrst)}</td>
+                        <td>${fmtFromCents(endbal)}&nbsp;</td>
+                    </tr>`;
+        };
+        const dtl = details();
+        let mon = dtl.mon, yr = dtl.yr;
+        const startyr = yr;
+        let intperyear = prinperyear = endyearbal = 0;
+        let innertext = '';
+        let begbal = dtl.amt, endbal, prin, intrst, remint = dtl.ttlint;
+        for (let i = 1; i <= dtl.termb - 1; ++i) {
+            intrst = Math.min(remint, Math.roundHalfEven(begbal * dtl.rateb));
+            intperyear += intrst;
+            prinperyear += dtl.pmt - intrst;
+            begbal -= dtl.pmt - intrst;
+            remint -= intrst;
+            let [newmon, newyr] = monthsDiff(mon, yr, 1);
+            if (newmon == 1) {
+                endyearbal = begbal;
+                innertext += amortLine(yr-startyr+1, String(yr), prinperyear,
+                    intperyear, endyearbal);
+                intperyear = prinperyear = endyearbal = 0;
+            }
+            mon = newmon, yr = newyr;
+        }
+        intperyear += remint;
+        prinperyear += dtl.fnlpmt - remint;
+        innertext += amortLine(yr-startyr+1, String(yr), prinperyear,
+                    intperyear, endyearbal);
+        idtblamorthead.innerHTML = HDR;
+        idtblamortbody.innerHTML = innertext;
+        idtblamort.className += " clsnarrow";
+        idtblamort.parentElement.className += " clsnarrow";
+    }
     function buttonManager() {
         idcalc.disabled = !(idamount.getAttribute("usenum").length &&
             idapr.getAttribute("usenum").length &&
@@ -240,6 +399,18 @@
         const payback = pmt * nper;
         // console.log(payback);
         return [Math.roundHalfEven(pmt), Math.floor(payback)];
+    }
+    function fillSummary(amt, ratea, terma, termb, pmt, ttlpay, lastpay) {
+        iddsplyamt.innerHTML = fmtFromCents(amt);
+        iddsplyapr.innerHTML = ratea + "%";
+        iddsplyterm.innerHTML = terma + " " + (idtermmonths.checked ? "Mon." : "Yr.");
+        iddsplypmt.innerHTML = fmtFromCents(pmt);
+        const fnlpmt = ttlpay - (termb - 1) * pmt;
+        iddsplyfnlpmt.innerHTML = fmtFromCents(fnlpmt);
+        iddsplyttlpmt.innerHTML = fmtFromCents(ttlpay);
+        const ttlint = ttlpay - amt;
+        iddsplyttlint.innerHTML = fmtFromCents(ttlint);
+        iddsplylastpay.innerHTML = lastpay;
     }
     function fmtFromCents(x) {
         return Math.floor(x / 100).toLocaleString() + "." + String(x % 100).padStart(2, '0');
@@ -257,7 +428,7 @@
                 mat = idamount.value.match(rxamount);
                 if (!mat) break;
                 n = Number(mat[0].replace(/[$,]/g, ''));
-                valid = n >= 100 && n < 1e9;
+                valid = n >= 100 && n < 1e11;
                 break;
             case "idapr":
                 mat = idapr.value.match(rxapr);
@@ -279,66 +450,58 @@
         el.setAttribute("usenum", valid ? n.toString() : "");
         buttonManager();
     }
+    function leaveMonth(evt) {
+        if (!/^\d{1,2}$/.test(idmonth.value))
+            idmonth.value = nextMonthYear()[0] + 1;
+    }
+    function leaveYear(evt) {
+        if (!/^20\d\d$/.test(idyear.value))
+            idyear.value = nextMonthYear()[1];
+    }
+    function monthsDiff(mo, yr, delta) {
+        //returns an array with [month, year]
+        //expects input and output month to be 1-based
+        const date = new Date(yr, mo - 1, 1);
+        date.setMonth(date.getMonth() + delta);
+        return [date.getMonth() + 1, date.getFullYear()];
+
+    }
+    function nextMonthYear() {
+        const now = new Date();
+        const nextmonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+        return [nextmonth.getMonth(), nextmonth.getFullYear()];
+    }
     function showResults(e) {
         idcalc.innerHTML = 'Building Table...';
         idcalc.disabled = true;
         setTimeout(_showResults, 10);
     }
     function _showResults() {
-        function amortLine(i, begbal, pmt, prin, intrst, endbal) {
-            return `<div style="display:flex">
-                        <div style="flex:1">${i}</div>
-                        <div style="flex:2">${fmtFromCents(begbal)}</div>
-                        <div style="flex:2">${fmtFromCents(pmt)}</div>
-                        <div style="flex:2">${fmtFromCents(prin)}</div>
-                        <div style="flex:2">${fmtFromCents(intrst)}</div>
-                        <div style="flex:2">${fmtFromCents(endbal)}</div>
-                    </div>`;
-        }
-        const amt = (idamount.getAttribute("usenum") - 0) * 100/*cents per*/;
-        const ratea = Number((idapr.getAttribute("usenum") - 0).toPrecision(4));
-        const rateb = ratea / 1200;
-        const terma = idterm.getAttribute("usenum") - 0;
-        const termb = terma * (idtermmonths.checked ? 1 : 12);
-        const [pmt, ttlpay] = calcPmt(amt, rateb, termb);
 
-        //Summary
-        iddsplyamt.innerHTML = fmtFromCents(amt);
-        iddsplyapr.innerHTML = ratea + "%";
-        iddsplyterm.innerHTML = terma + " " + (idtermmonths.checked ? "Mon." : "Yr.");
-        iddsplypmt.innerHTML = fmtFromCents(pmt);
-        const fnlpmt = ttlpay - (termb - 1) * pmt;
-        iddsplyfnlpmt.innerHTML = fmtFromCents(fnlpmt);
-        iddsplyttlpmt.innerHTML = fmtFromCents(ttlpay);
-        const ttlint = ttlpay - amt;
-        iddsplyttlint.innerHTML = fmtFromCents(ttlint);
+        const dtl = details();
 
-        //Amort
-        idamortdetails.innerHTML = '';
-        let innertext = '';
-        // innertext += hdrLine(false);
-        let begbal = amt, endbal, prin, intrst, remint = ttlint;
-        for (let i = 1; i <= termb - 1; ++i) {
-            intrst = Math.min(remint, Math.roundHalfEven(begbal * rateb));
-            innertext += amortLine(i, begbal, pmt, pmt - intrst, intrst, begbal - (pmt - intrst));
-            begbal -= pmt - intrst;
-            remint -= intrst;
-            // if (i > 1 && i % 12 == 0)
-            //     innertext += hdrLine();
-        }
-        innertext += amortLine(termb, begbal, fnlpmt, fnlpmt - remint, remint, 0);
-        idamortdetails.innerHTML = innertext;
+        let [mon, yr] = [idmonth.value, idyear.value];
+        let [lastmon, lastyr] = monthsDiff(mon - 1 - 1, yr, dtl.termb);
+        const lastpay = `${String(lastmon + 1).padStart(2, '0')}/${lastyr}`;
+
+        fillSummary(dtl.amt, dtl.ratea, dtl.terma, dtl.termb, dtl.pmt, dtl.ttlpay, lastpay);
+
+        amortByMonth();
 
         idcalc.innerHTML = 'Calculate';
         idcalc.disabled = false;
     }
     {
+        idmonth.addEventListener("blur", leaveMonth)
+        idyear.addEventListener("blur", leaveYear)
+
         idamount.value = idapr.value = idterm.value = '';
         idamount.addEventListener("input", inpChanged);
         idapr.addEventListener("input", inpChanged);
         idterm.addEventListener("input", inpChanged);
         idtermtype.addEventListener("input", inpChanged);
         idcalc.addEventListener("click", showResults);
+
         idamount.setAttribute("usenum", "");
         idapr.setAttribute("usenum", "");
         idterm.setAttribute("usenum", "");
@@ -347,7 +510,10 @@
                 return Math.round(x);
             return Math.floor(x) % 2 ? Math.ceil(x) : Math.floor(x);
         }
-        idamount.focus();
+        const nxt = nextMonthYear();
+        idmonth.value = nxt[0] + 1;/*zero-based to one-based*/
+        idyear.value = nxt[1];
+        idmonth.focus();
     }
 
 </script>
